@@ -97,7 +97,7 @@ if password != "IndorajHRTeam123":  # Replace with your desired password
 # Input fields
 default_keywords = {
     "lokasi": "semarang",
-    "pendidikan": "univ,smk,sma",
+    "pendidikan": "univ,smk,sma,S1,D3,D4",
     "jurusan": "kearsipan,perpustakaan,administrasi",
     "perusahaan": "indoraj,arsip",
     "pengalaman": "1 tahun,satu tahun"
