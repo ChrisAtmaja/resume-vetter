@@ -90,7 +90,7 @@ st.title("Resume Vetting Tool")
 
 # Password Check
 password = st.text_input("Masukkan kata sandi", type="password")
-if password != "your_team_password":  # Replace with your desired password
+if password != "IndorajHRTeam123":  # Replace with your desired password
     st.error("Kata sandi salah!")
     st.stop()
 
@@ -144,8 +144,10 @@ if st.button("Jalankan Vetting"):
         wb = Workbook()
         ws_bagus = wb.create_sheet("Bagus_Sekali")
         ws_layak = wb.create_sheet("Layak")
+        ws_ditolak = wb.create_sheet("Ditolak")  # New sheet for rejected applicants
         ws_bagus.append(["Nama File", "Email", "Nomor Telepon"])
         ws_layak.append(["Nama File", "Email", "Nomor Telepon"])
+        ws_ditolak.append(["Nama File", "Email", "Nomor Telepon"])  # Header for Ditolak sheet
 
         # Process each uploaded file
         st.write("Hasil Vetting:")
@@ -180,10 +182,13 @@ if st.button("Jalankan Vetting"):
                     ws = ws_layak
                     category = "LAYAK"
                 else:
+                    ws = ws_ditolak  # Save to Ditolak sheet
+                    category = "DITOLAK"
                     st.write(f"❌ {file.name} - SKOR {score} (Ditolak)")
+                    ws.append([file.name, email_str, phone_str])  # Save rejected data
                     continue
 
-                # Save file to target folder
+                # Save file to target folder for accepted categories
                 with open(os.path.join(target_folder, file.name), "wb") as f:
                     f.write(file.read())
                 ws.append([file.name, email_str, phone_str])
